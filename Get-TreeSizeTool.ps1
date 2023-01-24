@@ -1,10 +1,12 @@
+
+#[CmdletBinding()]
+param (
+    [Parameter()]
+    [string] $RootPath = '.'
+)
+
 Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
-
-param(
-    [Parameter(Mandatory)]
-    [string] $Path = '.'
-)
 
 function Get-TreeSize {
     [CmdletBinding()]
@@ -15,7 +17,7 @@ function Get-TreeSize {
 
     try {
         #here could occurr an I/O error
-        $list = Get-ChildItem -Path $path
+        $list = Get-ChildItem -Path $Path
     }
     catch {
         # there is an error: output 0 and quit the function
@@ -39,6 +41,6 @@ function Get-TreeSize {
     return $dim
 }
 
-$dim = Get-TreeSize -Path $Path
+$dim = Get-TreeSize -Path $RootPath
 
-Write-Host {0:n0} -f $dim
+Write-Host $dim
