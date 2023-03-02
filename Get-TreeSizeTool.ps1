@@ -17,6 +17,7 @@ function Get-TreeSize {
 
     try {
         #here could occurr an I/O error
+        $fullname = (Get-ItemProperty -Path $Path).FullName
         $list = Get-ChildItem -Path $Path
     }
     catch {
@@ -38,6 +39,7 @@ function Get-TreeSize {
             Write-Debug "Unknown $item.FullName"
         }
     }
+    Write-Host "$dim $fullname"
     return $dim
 }
 
